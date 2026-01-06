@@ -1,0 +1,148 @@
+{
+  "info": {
+    "_postman_id": "notes-api-collection",
+    "name": "Notes API",
+    "description": "Colección de endpoints para la API de Notas",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Crear Nota",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Mi primera nota\",\n  \"content\": \"Este es el contenido de mi primera nota\",\n  \"archived\": false\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/notes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "notes"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Obtener Notas Activas",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/notes/active",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "notes",
+            "active"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Obtener Notas Archivadas",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/notes/archived",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "notes",
+            "archived"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Actualizar Nota",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Nota actualizada\",\n  \"content\": \"Contenido actualizado de la nota\",\n  \"archived\": false\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/notes/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "notes",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Archivar/Desarchivar Nota",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/notes/1/archive",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "notes",
+            "1",
+            "archive"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Eliminar Nota",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/notes/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "notes",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
