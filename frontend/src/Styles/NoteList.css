@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Contenedor principal de la página de notas */
+.notes-page {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #e9d5ff, #dbeafe);
+  padding: 2em;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Header de la sección de notas */
+.notes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2em;
+  background-color: white;
+  padding: 1.5em;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px -1px rgba(0, 0, 0, 0.75);
+  gap: 1em;
+}
+
+.notes-header-left {
+  flex: 1;
+}
+
+.notes-title {
+  color: rgb(77, 75, 75);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  font-size: 1.75rem;
+  margin: 0 0 0.25em 0;
+}
+
+.notes-subtitle {
+  color: rgb(100, 100, 100);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.notes-header-right {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+
+/* Toggle de vista (Grid/List) */
+.view-toggle {
+  display: flex;
+  gap: 0.5em;
+  background-color: #f5f5f5;
+  padding: 0.25em;
+  border-radius: 5px;
+}
+
+.toggle-btn {
+  padding: 0.5em 1em;
+  border: none;
+  background-color: transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: rgb(77, 75, 75);
+  transition: all 0.3s;
+}
+
+.toggle-btn.active {
+  background-color: #639;
+  color: white;
+}
+
+.toggle-btn:hover:not(.active) {
+  background-color: #e0e0e0;
+}
+
+/* Botón de nueva nota */
+.btn-new-note {
+  padding: 0.625em 1.5em;
+  border-radius: 5px;
+  color: white;
+  background-color: #639;
+  border: 1px dashed #639;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.5s;
+  white-space: nowrap;
+}
+
+.btn-new-note:hover {
+  color: #639;
+  background-color: white;
+  border: 1px dashed #639;
+}
+
+/* Botón de cancelar edición */
+.btn-cancel {
+  padding: 0.625em 1.5em;
+  border-radius: 5px;
+  color: white;
+  background-color: #dc2626;
+  border: 1px dashed #dc2626;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.5s;
+  margin: 1em auto;
+  display: block;
+}
+
+.btn-cancel:hover {
+  color: #dc2626;
+  background-color: white;
+  border: 1px dashed #dc2626;
+}
+
+/* Pestañas (Tabs) */
+.tabs {
+  display: flex;
+  gap: 1em;
+  margin-bottom: 2em;
+}
+
+.tab {
+  flex: 1;
+  padding: 1em;
+  border-radius: 10px;
+  background-color: white;
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: rgb(77, 75, 75);
+  transition: all 0.3s;
+  box-shadow: 3px 3px 10px -1px rgba(0, 0, 0, 0.5);
+}
+
+.tab:hover {
+  transform: translateY(-2px);
+  box-shadow: 5px 5px 15px -1px rgba(0, 0, 0, 0.7);
+}
+
+.tab.active {
+  background-color: #639;
+  color: white;
+  border-color: #639;
+  box-shadow: 5px 5px 15px -1px rgba(0, 0, 0, 0.75);
+}
+
+/* Contenedor de notas */
+.notes-container {
+  margin-top: 2em;
+}
+
+/* Vista Grid */
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5em;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* Vista List */
+.notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* Mensajes de estado */
+.loading,
+.empty-message {
+  text-align: center;
+  padding: 3em;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px -1px rgba(0, 0, 0, 0.75);
+  color: rgb(100, 100, 100);
+  font-size: 1.1rem;
+}
+
+/* Responsive para tablets */
+@media (max-width: 768px) {
+  .notes-page {
+    padding: 1em;
+  }
+
+  .notes-header {
+    flex-direction: column;
+    padding: 1.25em;
+  }
+
+  .notes-header-right {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .view-toggle {
+    width: 100%;
+  }
+
+  .toggle-btn {
+    flex: 1;
+  }
+
+  .btn-new-note {
+    width: 100%;
+  }
+
+  .notes-title {
+    font-size: 1.5rem;
+  }
+
+  .tabs {
+    flex-direction: column;
+  }
+
+  .notes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Responsive para móviles */
+@media (max-width: 480px) {
+  .notes-page {
+    padding: 0.75em;
+  }
+
+  .notes-header {
+    padding: 1em;
+  }
+
+  .notes-title {
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+  }
+
+  .notes-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .toggle-btn,
+  .btn-new-note,
+  .tab {
+    font-size: 0.875rem;
+  }
+
+  .notes-grid {
+    gap: 1em;
+  }
+}

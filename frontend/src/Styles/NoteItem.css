@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Item de nota individual */
+.note-item {
+  background-color: white;
+  border-radius: 10px;
+  padding: 1.5em;
+  margin-bottom: 1.25em;
+  box-shadow: 5px 5px 15px -1px rgba(0, 0, 0, 0.75);
+  list-style: none;
+  font-family: 'Inter', sans-serif;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.note-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 5px 7px 20px -1px rgba(0, 0, 0, 0.85);
+}
+
+/* Contenido de la nota */
+.note-content {
+  margin-bottom: 1.25em;
+}
+
+.note-content h3 {
+  color: rgb(77, 75, 75);
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 0 0 0.5em 0;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+}
+
+.note-content p {
+  color: rgb(100, 100, 100);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+/* Contenedor de acciones/botones */
+.note-actions {
+  display: flex;
+  gap: 0.625em;
+  flex-wrap: wrap;
+}
+
+/* Estilos base para todos los botones */
+.note-actions button {
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  border: 1px dashed;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.5s;
+  flex: 1;
+  min-width: fit-content;
+}
+
+/* Botón de editar */
+.btn-edit {
+  color: white;
+  background-color: #663399;
+  border-color: #663399;
+}
+
+.btn-edit:hover {
+  color: #639;
+  background-color: white;
+  border-color: #639;
+}
+
+/* Botón de archivar */
+.btn-archive {
+  color: white;
+  background-color: #3E3548;
+  border-color: #3E3548;
+}
+
+.btn-archive:hover {
+  color: #0891b2;
+  background-color: white;
+  border-color: #0891b2;
+}
+
+/* Botón de eliminar */
+.btn-delete {
+  color: white;
+  background-color: /* #5E3B58 */#803B58;
+  border-color: /* #5E3B58 */#803B58;
+}
+
+.btn-delete:hover {
+  color: #dc2626c5;
+  background-color: white;
+  border-color: #dc2626c5;
+}
+
+/* Responsive para tablets */
+@media (max-width: 768px) {
+  .note-item {
+    padding: 1.25em;
+  }
+
+  .note-content h3 {
+    font-size: 1.1rem;
+  }
+
+  .note-content p {
+    font-size: 0.9rem;
+  }
+
+  .note-actions {
+    gap: 0.5em;
+  }
+
+  .note-actions button {
+    font-size: 0.8rem;
+    padding: 0.4em 0.8em;
+  }
+}
+
+/* Responsive para móviles */
+@media (max-width: 480px) {
+  .note-item {
+    padding: 1em;
+  }
+
+  .note-actions {
+    flex-direction: column;
+  }
+
+  .note-actions button {
+    width: 100%;
+    flex: none;
+  }
+}

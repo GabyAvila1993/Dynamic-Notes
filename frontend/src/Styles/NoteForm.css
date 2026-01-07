@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+/* Contenedor principal con fondo degradado */
+.note-form-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom right, #e9d5ff, #dbeafe);
+  padding: 1rem;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Formulario estilo tarjeta */
+.note-form {
+  background-color: white;
+  padding: 3.125em;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 5px 5px 15px -1px rgba(0, 0, 0, 0.75);
+  width: 100%;
+  max-width: 450px;
+}
+
+/* Título del formulario */
+.note-form h2 {
+  color: rgb(77, 75, 75);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: block;
+  font-weight: bold;
+  font-size: x-large;
+  margin-bottom: 0.5em;
+  margin-top: 0;
+}
+
+/* Contenedor del form */
+.note-form form {
+  width: 100%;
+}
+
+/* Grupos de formulario */
+.note-form .form-group {
+  width: 100%;
+  margin-bottom: 1.25em;
+}
+
+/* Labels ocultas (mantener para accesibilidad) */
+.note-form .form-group label {
+  display: block;
+  margin-bottom: 0.5em;
+  color: rgb(77, 75, 75);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* Inputs y textarea */
+.note-form input[type="text"],
+.note-form textarea {
+  width: 100%;
+  min-height: 40px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  padding: 0.8em;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  font-size: 14px;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+/* Textarea específico */
+.note-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Estado focus */
+.note-form input[type="text"]:focus,
+.note-form textarea:focus {
+  border: 1px solid #639;
+  outline: none;
+}
+
+/* Estado disabled */
+.note-form input[type="text"]:disabled,
+.note-form textarea:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+/* Botón de submit */
+.note-form button[type="submit"] {
+  width: 50%;
+  padding: 0.625em;
+  border-radius: 5px;
+  color: white;
+  background-color: #639;
+  border: 1px dashed #639;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.5s;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Hover del botón */
+.note-form button[type="submit"]:hover:not(:disabled) {
+  color: #639;
+  background-color: white;
+  border: 1px dashed #639;
+}
+
+/* Estado disabled del botón */
+.note-form button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive para tablets y móviles */
+@media (max-width: 640px) {
+  .note-form {
+    padding: 2em;
+  }
+  
+  .note-form h2 {
+    font-size: large;
+  }
+  
+  .note-form button[type="submit"] {
+    width: 70%;
+  }
+}
+
+/* Responsive para móviles pequeños */
+@media (max-width: 380px) {
+  .note-form {
+    padding: 1.5em;
+  }
+  
+  .note-form button[type="submit"] {
+    width: 100%;
+  }
+}
