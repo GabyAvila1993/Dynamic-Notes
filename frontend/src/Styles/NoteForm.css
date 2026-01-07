@@ -1,17 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
-/* Contenedor principal con fondo degradado */
-.note-form-wrapper {
-  min-height: 100vh;
+/* Overlay del modal (fondo desenfocado) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to bottom right, #e9d5ff, #dbeafe);
   padding: 1rem;
+  z-index: 1000;
   font-family: 'Inter', sans-serif;
 }
 
-/* Formulario estilo tarjeta */
+/* Formulario estilo tarjeta modal */
 .note-form {
   background-color: white;
   padding: 3.125em;
@@ -22,6 +28,29 @@
   box-shadow: 5px 5px 15px -1px rgba(0, 0, 0, 0.75);
   width: 100%;
   max-width: 450px;
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Animación de entrada del modal */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header del formulario con título y botón cerrar */
+.note-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1.5em;
+  position: relative;
 }
 
 /* Título del formulario */
@@ -32,8 +61,29 @@
   display: block;
   font-weight: bold;
   font-size: x-large;
-  margin-bottom: 0.5em;
-  margin-top: 0;
+  margin: 0;
+  flex: 1;
+}
+
+/* Botón de cerrar */
+.btn-close {
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  color: rgb(77, 75, 75);
+  cursor: pointer;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.btn-close:hover {
+  color: #dc2626;
+  transform: scale(1.1);
 }
 
 /* Contenedor del form */

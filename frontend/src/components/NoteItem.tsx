@@ -50,7 +50,7 @@ export const NoteItem: React.FC<NoteItemProps> = ({
       <div className="note-actions">
         {/* Botón de editar */}
         <button className="btn-edit" onClick={onEdit} title="Editar">
-          ✏️ Editar
+          ✏️
         </button>
 
         {/* Botón de archivar/desarchivar */}
@@ -59,12 +59,12 @@ export const NoteItem: React.FC<NoteItemProps> = ({
           onClick={handleArchiveToggle}
           title={note.archived ? "Desarchivar" : "Archivar"}
         >
-          {note.archived ? "📂 Desarchivar" : "📁 Archivar"}
+          {note.archived ? "📂" : "📁"}
         </button>
 
         {/* Botón de eliminar */}
         <button className="btn-delete" onClick={handleDelete} title="Eliminar">
-          🗑️ Eliminar
+          🗑️
         </button>
       </div>
     </li>

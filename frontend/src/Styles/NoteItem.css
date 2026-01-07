@@ -10,6 +10,9 @@
   list-style: none;
   font-family: 'Inter', sans-serif;
   transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .note-item:hover {
@@ -20,6 +23,7 @@
 /* Contenido de la nota */
 .note-content {
   margin-bottom: 1.25em;
+  flex: 1;
 }
 
 .note-content h3 {
@@ -43,21 +47,26 @@
 .note-actions {
   display: flex;
   gap: 0.625em;
-  flex-wrap: wrap;
+  align-items: center;
+  margin-top: auto;
+  justify-content: flex-start;
 }
 
 /* Estilos base para todos los botones */
 .note-actions button {
-  padding: 0.5em 1em;
+  padding: 0.5em 0.75em;
   border-radius: 5px;
   border: 1px dashed;
   cursor: pointer;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: 1.25rem;
   transition: all 0.5s;
-  flex: 1;
-  min-width: fit-content;
+  width: auto;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Botón de editar */
@@ -76,8 +85,8 @@
 /* Botón de archivar */
 .btn-archive {
   color: white;
-  background-color: #3E3548;
-  border-color: #3E3548;
+  background-color: #827FA9;
+  border-color: #827FA9;
 }
 
 .btn-archive:hover {
@@ -89,8 +98,8 @@
 /* Botón de eliminar */
 .btn-delete {
   color: white;
-  background-color: /* #5E3B58 */#803B58;
-  border-color: /* #5E3B58 */#803B58;
+  background-color: /* #5E3B58 */#AA4592;
+  border-color: /* #5E3B58 */#AA4592;
 }
 
 .btn-delete:hover {

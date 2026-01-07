@@ -8,12 +8,14 @@ interface NoteFormProps {
   onNoteAdded: () => void;
   noteToEdit?: Note | null;
   onEditComplete?: () => void;
+  onClose?: () => void;
 }
 
 export const NoteForm: React.FC<NoteFormProps> = ({
   onNoteAdded,
   noteToEdit,
   onEditComplete,
+  onClose,
 }) => {
   // Estados para el formulario
   const [title, setTitle] = useState(noteToEdit?.title || "");
@@ -61,40 +63,52 @@ export const NoteForm: React.FC<NoteFormProps> = ({
   };
 
   return (
-    <div className="note-form">
-      <h2>{noteToEdit ? "Editar nota" : "Nueva nota"}</h2>
-      <form onSubmit={handleSubmit}>{}
-        {/* Campo de título */}
-        <div className="form-group">
-          <label htmlFor="title">Título</label>
-          <input
-            id="title"
-            type="text"
-            placeholder="Escribe el título de la nota"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            disabled={loading}
-          />
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="note-form" onClick={(e) => e.stopPropagation()}>
+        <div className="note-form-header">
+          <h2>{noteToEdit ? "Editar nota" : "Nueva nota"}</h2>
+          <button 
+            className="btn-close" 
+            onClick={onClose}
+            type="button"
+            aria-label="Cerrar"
+          >
+            ✕
+          </button>
         </div>
+        <form onSubmit={handleSubmit}>
+          {/* Campo de título */}
+          <div className="form-group">
+            <label htmlFor="title">Título</label>
+            <input
+              id="title"
+              type="text"
+              placeholder="Escribe el título de la nota"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              disabled={loading}
+            />
+          </div>
 
-        {/* Campo de contenido */}
-        <div className="form-group">
-          <label htmlFor="content">Contenido</label>
-          <textarea
-            id="content"
-            placeholder="Escribe el contenido de la nota"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            disabled={loading}
-            rows={5}
-          />
-        </div>
+          {/* Campo de contenido */}
+          <div className="form-group">
+            <label htmlFor="content">Contenido</label>
+            <textarea
+              id="content"
+              placeholder="Escribe el contenido de la nota"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              disabled={loading}
+              rows={5}
+            />
+          </div>
 
-        {/* Botón de envío */}
-        <button type="submit" disabled={loading}>
-          {loading ? "Guardando..." : noteToEdit ? "Actualizar" : "Crear nota"}
-        </button>
-      </form>
+          {/* Botón de envío */}
+          <button type="submit" disabled={loading}>
+            {loading ? "Guardando..." : noteToEdit ? "Actualizar" : "Crear nota"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

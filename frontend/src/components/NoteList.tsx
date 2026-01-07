@@ -66,7 +66,7 @@ export const NoteList: React.FC = () => {
     <div className="notes-page">
       {/* Formulario de nueva nota o edición */}
       {showForm && !noteToEdit && (
-        <NoteForm onNoteAdded={handleNoteAdded} />
+        <NoteForm onNoteAdded={handleNoteAdded} onClose={() => setShowForm(false)} />
       )}
 
       {noteToEdit && (
@@ -75,6 +75,7 @@ export const NoteList: React.FC = () => {
             onNoteAdded={handleNoteAdded}
             noteToEdit={noteToEdit}
             onEditComplete={handleEditComplete}
+            onClose={() => setNoteToEdit(null)}
           />
           <button
             className="btn-cancel"
