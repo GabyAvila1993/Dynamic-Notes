@@ -5,8 +5,20 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   
   // Habilitar CORS para permitir que el frontend acceda al backend
+  const allowedOrigins = [
+    'http://localhost:5173', // Frontend local (Vite)
+    'http://localhost:3000', // Frontend local alternativo
+    'https://dynamic-notes-frontend.onrender.com', // Frontend en Render
+  ];
+  
   app.enableCors({
-    origin: 'http://localhost:5173', // URL del frontend
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('CORS no permitido'));
+      }
+    },
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
