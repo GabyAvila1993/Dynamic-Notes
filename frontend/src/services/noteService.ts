@@ -7,16 +7,38 @@ export interface Note {
   title: string;
   content: string;
   archived: boolean;
+  category: string;
 }
 
+// Categorías disponibles
+export const CATEGORIES = [
+  "Work",
+  "Personal",
+  "Ideas",
+  "Study",
+  "Others"
+] as const;
+
+// Normalizar categorías al inglés (para notas antiguas)
+export const normalizeCategoryToEnglish = (category: string): string => {
+  const categoryMap: { [key: string]: string } = {
+    "Trabajo": "Work",
+    "Personal": "Personal",
+    "Ideas": "Ideas",
+    "Estudio": "Study",
+    "Otros": "Others",
+  };
+  return categoryMap[category] || category;
+};
+
 // Crear una nueva nota
-export const createNote = async (title: string, content: string) => {
+export const createNote = async (title: string, content: string, category: string) => {
   const response = await fetch(API_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ title, content }),
+    body: JSON.stringify({ title, content, category }),
   });
   return response.json();
 };
@@ -37,14 +59,15 @@ export const getArchivedNotes = async () => {
 export const updateNote = async (
   id: number,
   title: string,
-  content: string
+  content: string,
+  category: string
 ) => {
   const response = await fetch(`${API_URL}/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ title, content }),
+    body: JSON.stringify({ title, content, category }),
   });
   return response.json();
 };
@@ -64,3 +87,4 @@ export const toggleArchiveNote = async (id: number) => {
   });
   return response.json();
 };
+

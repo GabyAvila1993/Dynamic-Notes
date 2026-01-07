@@ -20,19 +20,44 @@
   box-shadow: 5px 7px 20px -1px rgba(0, 0, 0, 0.85);
 }
 
+/* Encabezado de la nota con título y categoría */
+.note-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1em;
+  margin-bottom: 0.75em;
+}
+
+.note-header h3 {
+  color: rgb(77, 75, 75);
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 0;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  flex: 1;
+}
+
+/* Badge de categoría */
+.note-category-badge {
+  background-color: #663399;
+  color: white;
+  padding: 0.4em 0.75em;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
 /* Contenido de la nota */
 .note-content {
   margin-bottom: 1.25em;
   flex: 1;
-}
-
-.note-content h3 {
-  color: rgb(77, 75, 75);
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin: 0 0 0.5em 0;
-  text-transform: capitalize;
-  letter-spacing: 0.5px;
 }
 
 .note-content p {
@@ -49,7 +74,7 @@
   gap: 0.625em;
   align-items: center;
   margin-top: auto;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 /* Estilos base para todos los botones */
@@ -114,7 +139,7 @@
     padding: 1.25em;
   }
 
-  .note-content h3 {
+  .note-header h3 {
     font-size: 1.1rem;
   }
 
@@ -138,12 +163,104 @@
     padding: 1em;
   }
 
-  .note-actions {
+  .note-header {
     flex-direction: column;
   }
 
+  .note-category-badge {
+    align-self: flex-start;
+  }
+
+  .note-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
   .note-actions button {
-    width: 100%;
-    flex: none;
+    width: auto;
+    flex: 0 1 auto;
+    padding: 0.4em 0.6em;
+    font-size: 1rem;
+  }
+}
+
+
+/* Estilos base para todos los botones */
+.note-actions button {
+  padding: 0.5em 0.75em;
+  border-radius: 5px;
+  border: 1px dashed;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  transition: all 0.5s;
+  width: auto;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Botón de editar */
+.btn-edit {
+  color: white;
+  background-color: #663399;
+  border-color: #663399;
+}
+
+.btn-edit:hover {
+  color: #639;
+  background-color: white;
+  border-color: #639;
+}
+
+/* Botón de archivar */
+.btn-archive {
+  color: white;
+  background-color: #827FA9;
+  border-color: #827FA9;
+}
+
+.btn-archive:hover {
+  color: #0891b2;
+  background-color: white;
+  border-color: #0891b2;
+}
+
+/* Botón de eliminar */
+.btn-delete {
+  color: white;
+  background-color: /* #5E3B58 */#AA4592;
+  border-color: /* #5E3B58 */#AA4592;
+}
+
+.btn-delete:hover {
+  color: #dc2626c5;
+  background-color: white;
+  border-color: #dc2626c5;
+}
+
+/* Responsive para tablets */
+@media (max-width: 768px) {
+  .note-item {
+    padding: 1.25em;
+  }
+
+  .note-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .note-content p {
+    font-size: 0.9rem;
+  }
+
+  .note-actions {
+    gap: 0.5em;
+  }
+
+  .note-actions button {
+    font-size: 0.8rem;
+    padding: 0.4em 0.8em;
   }
 }

@@ -22,6 +22,10 @@ export class NotesService {
     return this.notesRepo.find({ where: { archived: true } });
   }
 
+  findByCategory(category: string) {
+    return this.notesRepo.find({ where: { category, archived: false } });
+  }
+
   update(id: number, note: Partial<Note>) {
     return this.notesRepo.update(id, note);
   }

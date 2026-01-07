@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
 import type { Note } from "../services/noteService";
-import { getActiveNotes, getArchivedNotes } from "../services/noteService";
+import { getActiveNotes, getArchivedNotes, CATEGORIES } from "../services/noteService";
 import { NoteForm } from "./NoteForm";
 import { NoteItem } from "./NoteItem";
 import "../Styles/NoteList.css";
 
 export const NoteList: React.FC = () => {
-  // Estados
+  // States
   const [activeNotes, setActiveNotes] = useState<Note[]>([]);
   const [archivedNotes, setArchivedNotes] = useState<Note[]>([]);
   const [currentTab, setCurrentTab] = useState<"active" | "archived">("active");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [noteToEdit, setNoteToEdit] = useState<Note | null>(null);
   const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [showForm, setShowForm] = useState(false);
+  const [showCategoryMenu, setShowCategoryMenu] = useState(false);
 
-  // Cargar las notas cuando el componente se monta o cuando se actualiza
+  // Load notes when component mounts or updates
   const loadNotes = async () => {
     setLoading(true);
     try {
@@ -24,47 +26,52 @@ export const NoteList: React.FC = () => {
       setActiveNotes(active);
       setArchivedNotes(archived);
     } catch (error) {
-      console.error("Error al cargar notas:", error);
-      alert("Error al cargar las notas");
+      console.error("Error loading notes:", error);
+      alert("Error loading notes");
     } finally {
       setLoading(false);
     }
   };
 
-  // Cargar notas al montar el componente
+  // Load notes on component mount
   useEffect(() => {
     loadNotes();
   }, []);
 
-  // Cuando se añade una nota, recargar
+  // When a note is added, reload
   const handleNoteAdded = () => {
     loadNotes();
     setNoteToEdit(null);
     setShowForm(false);
   };
 
-  // Cuando se completa la edición, recargar
+  // When edit is complete, reload
   const handleEditComplete = () => {
     loadNotes();
     setNoteToEdit(null);
   };
 
-  // Cuando se elimina una nota, recargar
+  // When a note is deleted, reload
   const handleNoteDeleted = () => {
     loadNotes();
   };
 
-  // Cuando se cambia el archivo, recargar
+  // When archive status changes, reload
   const handleArchiveToggle = () => {
     loadNotes();
   };
 
-  // Notas que se muestran (activas o archivadas según la pestaña)
-  const notesToShow = currentTab === "active" ? activeNotes : archivedNotes;
+  // Notes to display (active or archived depending on tab)
+  let notesToShow = currentTab === "active" ? activeNotes : archivedNotes;
+
+  // Filter by category if one is selected
+  if (selectedCategory) {
+    notesToShow = notesToShow.filter((note) => note.category === selectedCategory);
+  }
 
   return (
     <div className="notes-page">
-      {/* Formulario de nueva nota o edición */}
+      {/* New note form or edit */}
       {showForm && !noteToEdit && (
         <NoteForm onNoteAdded={handleNoteAdded} onClose={() => setShowForm(false)} />
       )}
@@ -77,16 +84,16 @@ export const NoteList: React.FC = () => {
             onEditComplete={handleEditComplete}
             onClose={() => setNoteToEdit(null)}
           />
-          <button
+          {/* <button
             className="btn-cancel"
             onClick={() => setNoteToEdit(null)}
           >
             Cancelar edición
-          </button>
+          </button> */}
         </>
       )}
 
-      {/* Sección de título y controles */}
+      {/* Title and controls section */}
       <div className="notes-header">
         <div className="notes-header-left">
           <h2 className="notes-title">
@@ -126,29 +133,76 @@ export const NoteList: React.FC = () => {
         </div>
       </div>
 
-      {/* Pestañas para cambiar entre activas y archivadas */}
+      {/* Tabs to switch between active and archived */}
       <div className="tabs">
         <button
           className={`tab ${currentTab === "active" ? "active" : ""}`}
-          onClick={() => setCurrentTab("active")}
+          onClick={() => {
+            setCurrentTab("active");
+            setSelectedCategory(null);
+          }}
         >
           📝 Active ({activeNotes.length})
         </button>
         <button
           className={`tab ${currentTab === "archived" ? "active" : ""}`}
-          onClick={() => setCurrentTab("archived")}
+          onClick={() => {
+            setCurrentTab("archived");
+            setSelectedCategory(null);
+          }}
         >
           📂 Archived ({archivedNotes.length})
         </button>
       </div>
 
-      {/* Lista/Grid de notas */}
+      {/* Category filters */}
+      <div className="category-filters">
+        <button
+          className={`category-menu-toggle`}
+          onClick={() => setShowCategoryMenu(!showCategoryMenu)}
+          title="Filter by category"
+        >
+          ☰ Categories
+        </button>
+        <div className={`category-buttons ${showCategoryMenu ? "open" : ""}`}>
+          <button
+            className={`category-btn ${selectedCategory === null ? "active" : ""}`}
+            onClick={() => {
+              setSelectedCategory(null);
+              setShowCategoryMenu(false);
+            }}
+          >
+            All ({currentTab === "active" ? activeNotes.length : archivedNotes.length})
+          </button>
+          {CATEGORIES.map((category) => {
+            const count = (currentTab === "active" ? activeNotes : archivedNotes).filter(
+              (note) => note.category === category
+            ).length;
+            return (
+              <button
+                key={category}
+                className={`category-btn ${selectedCategory === category ? "active" : ""}`}
+                onClick={() => {
+                  setSelectedCategory(category);
+                  setShowCategoryMenu(false);
+                }}
+              >
+                {category} ({count})
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Notes list/grid */}
       <div className={`notes-container ${viewMode}`}>
         {loading ? (
           <p className="loading">Loading...</p>
         ) : notesToShow.length === 0 ? (
           <p className="empty-message">
-            {currentTab === "active"
+            {selectedCategory
+              ? `No notes in ${selectedCategory} category`
+              : currentTab === "active"
               ? "No active notes"
               : "No archived notes"}
           </p>
@@ -172,3 +226,4 @@ export const NoteList: React.FC = () => {
     </div>
   );
 };
+

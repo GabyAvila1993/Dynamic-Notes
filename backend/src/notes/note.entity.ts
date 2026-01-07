@@ -13,4 +13,7 @@ export class Note {
 
   @Column({ default: false })
   archived: boolean;
+
+  @Column({ default: 'Otros' })
+  category: string;
 }

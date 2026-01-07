@@ -21,6 +21,11 @@ export class NotesController {
     return this.notesService.findAllArchived();
   }
 
+  @Get('category/:category')
+  findByCategory(@Param('category') category: string) {
+    return this.notesService.findByCategory(category);
+  }
+
   @Put(':id')
   update(@Param('id') id: number, @Body() note: Partial<Note>) {
     return this.notesService.update(id, note);

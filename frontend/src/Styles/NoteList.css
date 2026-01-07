@@ -99,7 +99,7 @@
 }
 
 /* Botón de cancelar edición */
-.btn-cancel {
+/* .btn-cancel {
   padding: 0.625em 1.5em;
   border-radius: 5px;
   color: white;
@@ -112,14 +112,14 @@
   transition: all 0.5s;
   margin: 1em auto;
   display: block;
-}
+} */
 
-.btn-cancel:hover {
+/* .btn-cancel:hover {
   color: #dc2626;
   background-color: white;
   border: 1px dashed #dc2626;
 }
-
+ */
 /* Pestañas (Tabs) */
 .tabs {
   display: flex;
@@ -152,6 +152,73 @@
   color: white;
   border-color: #639;
   box-shadow: 5px 5px 15px -1px rgba(0, 0, 0, 0.75);
+}
+
+/* Filtros de categoría */
+.category-filters {
+  display: flex;
+  gap: 0.75em;
+  margin-bottom: 2em;
+  flex-wrap: wrap;
+  background-color: white;
+  padding: 1.5em;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px -1px rgba(0, 0, 0, 0.75);
+  justify-content: center;
+  align-items: center;
+}
+
+.category-menu-toggle {
+  display: none;
+  padding: 0.6em 1.2em;
+  border-radius: 20px;
+  border: 2px solid #663399;
+  background-color: #663399;
+  color: white;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.category-menu-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(102, 51, 153, 0.3);
+}
+
+.category-buttons {
+  display: flex;
+  gap: 0.75em;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.category-btn {
+  padding: 0.5em 1em;
+  border-radius: 20px;
+  border: 2px solid #ddd;
+  background-color: white;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: rgb(77, 75, 75);
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.category-btn:hover {
+  border-color: #639;
+  color: #639;
+  transform: translateY(-2px);
+}
+
+.category-btn.active {
+  background-color: #663399;
+  color: white;
+  border-color: #663399;
+  box-shadow: 0 4px 10px rgba(102, 51, 153, 0.3);
 }
 
 /* Contenedor de notas */
@@ -229,6 +296,32 @@
 
   .notes-grid {
     grid-template-columns: 1fr;
+  }
+
+  .category-filters {
+    flex-direction: column;
+    padding: 1em;
+    align-items: center;
+  }
+
+  .category-menu-toggle {
+    display: block;
+    width: 100%;
+  }
+
+  .category-buttons {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .category-buttons.open {
+    display: flex;
+  }
+
+  .category-btn {
+    width: 100%;
+    text-align: center;
   }
 }
 

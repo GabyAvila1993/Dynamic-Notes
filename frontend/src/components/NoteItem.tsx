@@ -1,5 +1,5 @@
 import type { Note } from "../services/noteService";
-import { deleteNote, toggleArchiveNote } from "../services/noteService";
+import { deleteNote, toggleArchiveNote, normalizeCategoryToEnglish } from "../services/noteService";
 import "../Styles/NoteItem.css";
 
 
@@ -42,8 +42,11 @@ export const NoteItem: React.FC<NoteItemProps> = ({
 
   return (
     <li className="note-item">
-      <div className="note-content">
+      <div className="note-header">
         <h3>{note.title}</h3>
+        <span className="note-category-badge">{normalizeCategoryToEnglish(note.category)}</span>
+      </div>
+      <div className="note-content">
         <p>{note.content}</p>
       </div>
 
@@ -70,3 +73,4 @@ export const NoteItem: React.FC<NoteItemProps> = ({
     </li>
   );
 };
+

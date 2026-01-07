@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Note } from "../services/noteService";
-import { createNote, updateNote } from "../services/noteService";
+import { createNote, updateNote, CATEGORIES } from "../services/noteService";
 import "../Styles/NoteForm.css";
 
 
@@ -20,6 +20,7 @@ export const NoteForm: React.FC<NoteFormProps> = ({
   // Estados para el formulario
   const [title, setTitle] = useState(noteToEdit?.title || "");
   const [content, setContent] = useState(noteToEdit?.content || "");
+  const [category, setCategory] = useState(noteToEdit?.category || "Others");
   const [loading, setLoading] = useState(false);
 
   // Manejar el envío del formulario
@@ -37,20 +38,21 @@ export const NoteForm: React.FC<NoteFormProps> = ({
     try {
       if (noteToEdit) {
         // Si estamos editando, actualizar
-        await updateNote(noteToEdit.id, title, content);
+        await updateNote(noteToEdit.id, title, content, category);
         alert("¡Nota actualizada!");
         if (onEditComplete) {
           onEditComplete();
         }
       } else {
         // Si es nueva, crear
-        await createNote(title, content);
+        await createNote(title, content, category);
         alert("¡Nota creada!");
       }
 
       // Limpiar el formulario
       setTitle("");
       setContent("");
+      setCategory("Others");
 
       // Notificar al componente padre que se añadió una nota
       onNoteAdded();
@@ -103,6 +105,23 @@ export const NoteForm: React.FC<NoteFormProps> = ({
             />
           </div>
 
+          {/* Campo de categoría */}
+          <div className="form-group">
+            <label htmlFor="category">Categoría</label>
+            <select
+              id="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              disabled={loading}
+            >
+              {CATEGORIES.map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
+              ))}
+            </select>
+          </div>
+
           {/* Botón de envío */}
           <button type="submit" disabled={loading}>
             {loading ? "Guardando..." : noteToEdit ? "Actualizar" : "Crear nota"}
@@ -112,3 +131,4 @@ export const NoteForm: React.FC<NoteFormProps> = ({
     </div>
   );
 };
+
