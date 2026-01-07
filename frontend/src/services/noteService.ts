@@ -1,5 +1,5 @@
 // Configuración de la URL base del API
-const API_URL = "http://localhost:3000/notes";
+const API_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/notes`;
 
 // Interfaz para las notas
 export interface Note {
